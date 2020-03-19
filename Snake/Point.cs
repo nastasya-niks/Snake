@@ -55,6 +55,11 @@ namespace Snake
             Console.Write(sym);
         }
 
+        public void Clear()
+        {
+            sym = ' ';
+            Draw();
+        }
         public override string ToString()
         {
             return x + ", " + y + ", " + sym;
