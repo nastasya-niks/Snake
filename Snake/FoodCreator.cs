@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Snake
 {
-    class FoodCreator
+    class FoodCreator 
     {
         int mapWidht;
         int mapHeight;

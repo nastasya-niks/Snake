@@ -15,7 +15,7 @@ namespace Snake
         {
             direction = _direction;
             pList = new List<Point>();
-            for(int i=0; i<lenght; i++)
+            for (int i = 0; i < lenght; i++)
             {
                 Point p = new Point(tail);
                 p.Move(i, direction);
@@ -34,7 +34,7 @@ namespace Snake
             head.Draw();
 
         }
-        public Point GetNextPoint()
+        public Point GetNextPoint() //в какой точке окажется змейка в след момент
         {
             Point head = pList.Last();
             Point nextPoint = new Point(head);
@@ -43,9 +43,24 @@ namespace Snake
 
         }
 
+        internal bool IsHitTail()
+        {
+            var head = pList.Last();
+            for (int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         public void HandleKey(ConsoleKey key)
         {
-            if (key == ConsoleKey.LeftArrow)
+           
+             if (key == ConsoleKey.LeftArrow)
             {
                 direction = Direction.LEFT;
             }
@@ -62,20 +77,22 @@ namespace Snake
                 direction = Direction.UP;
             }
         }
+        
 
-        internal bool Eat(Point food)
-        {
-            Point head = GetNextPoint();
-            if (head.IsHit(food))
+            internal bool Eat(Point food)
             {
-                food.sym = head.sym;
-                pList.Add(food);
-                return true;
-            }
-            else
-            {
-                return false;
+                Point head = GetNextPoint();
+                if (head.IsHit(food))
+                {
+                    food.sym = head.sym;
+                    pList.Add(food);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
-}
+
